@@ -1,0 +1,8 @@
+#setup current server and port
+server:
+  port: 8088
+
+#setup logging
+logging:
+  level:
+    org.springframework.security : debug

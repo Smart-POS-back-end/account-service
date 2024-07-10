@@ -1,0 +1,13 @@
+#setup current server and port
+server:
+  port: 0
+
+# disable dev mode
+spring:
+  devtools:
+    add-properties: true
+
+# logging
+logging:
+  level:
+    web: debug
