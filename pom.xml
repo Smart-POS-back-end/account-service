@@ -115,6 +115,10 @@
             <id>github</id>
             <url>tps://maven.pkg.github.com/Smart-POS-back-end/common</url>
         </repository>
+        <repository>
+            <id>central</id>
+            <url>https://repo1.maven.org/maven2</url>
+        </repository>
     </repositories>
     <distributionManagement>
         <repository>
