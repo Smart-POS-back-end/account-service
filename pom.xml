@@ -113,7 +113,7 @@
     <repositories>
         <repository>
             <id>github</id>
-            <url>tps://maven.pkg.github.com/Smart-POS-back-end/common</url>
+            <url>https://maven.pkg.github.com/Smart-POS-back-end/common</url>
         </repository>
         <repository>
             <id>central</id>
