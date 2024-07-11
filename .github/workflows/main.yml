@@ -22,9 +22,9 @@ jobs:
         with:
           servers: |
             [{
-              "id": "sonatype-nexus-snapshots",
-              "username": "${{ secrets.SONATYPE_USERNAME }}",
-              "password": "${{ secrets.SONATYPE_PASSWORD }}"
+              "id": "github",
+              "username": "Smart-POS-back-end",
+              "password": "${{ secrets.GITHUB_TOKEN }}"
             }]
 
       - name: Set up JDK 21
