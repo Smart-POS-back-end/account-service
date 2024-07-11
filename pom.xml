@@ -18,6 +18,12 @@
         <spring-cloud.version>2023.0.0</spring-cloud.version>
         <spring-boot-admin.version>3.2.1</spring-boot-admin.version>
     </properties>
+    <repositories>
+        <repository>
+            <id>github</id>
+            <url>https://maven.pkg.github.com/Smart-POS-back-end/*</url>
+        </repository>
+    </repositories>
     <dependencies>
 
         <dependency>
