@@ -110,11 +110,17 @@
             </plugin>
         </plugins>
     </build>
+    <repositories>
+        <repository>
+            <id>github</id>
+            <url>tps://maven.pkg.github.com/Smart-POS-back-end/common</url>
+        </repository>
+    </repositories>
     <distributionManagement>
         <repository>
             <id>github</id>
             <name>GitHub OWNER Apache Maven Packages</name>
-            <url>https://maven.pkg.github.com/Smart-POS-back-end/*</url>
+            <url>https://maven.pkg.github.com/Smart-POS-back-end/account-service</url>
         </repository>
     </distributionManagement>
 </project>
