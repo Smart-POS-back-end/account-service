@@ -124,7 +124,7 @@
         <repository>
             <id>github</id>
             <name>GitHub OWNER Apache Maven Packages</name>
-            <url>https://maven.pkg.github.com/Smart-POS-back-end/account-service</url>
+            <url>https://maven.pkg.github.com/Smart-POS-back-end/action-service</url>
         </repository>
     </distributionManagement>
 </project>
