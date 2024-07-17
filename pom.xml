@@ -17,6 +17,7 @@
         <java.version>21</java.version>
         <spring-cloud.version>2023.0.0</spring-cloud.version>
         <spring-boot-admin.version>3.2.1</spring-boot-admin.version>
+        <common.version>0.0.1-SNAPSHOT</common.version>
     </properties>
     <dependencies>
 
@@ -72,7 +73,7 @@
         <dependency>
             <groupId>com.pesona.group</groupId>
             <artifactId>common</artifactId>
-            <version>0.0.1</version>
+            <version>${common.version}</version>
         </dependency>
     </dependencies>
     <dependencyManagement>
