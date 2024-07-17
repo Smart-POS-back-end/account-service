@@ -1,8 +1,64 @@
-#setup current server and port
 server:
-  port: 8088
+  port: 8081
+## main Setup
+spring:
+  security:
+    oauth2:
+#      client:
+#        provider:
+#          external:
+#            issuer-uri: http://localhost:8686/realms/account-service
+#        registration:
+#          external:
+#            provider: master
+#            client-name: account
+#            client-id: account
+#            client-secret: lLosZBvusN9CYFRMlEm3IVToWsKRG2Y2
+#            scope: openid,offline_access,profile
+#            authorization-grant-type: authorization_code
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8686/realms/account-service
+          jwk-set-uri: ${spring.security.oauth2.resourceserver.jwt.issuer-uri}/protocol/openid-connect/certs
+  application:
+    name: account-service
 
-#setup logging
-logging:
-  level:
-    org.springframework.security : debug
+## setup service discovery eureka
+eureka:
+  instance:
+    status-page-url-path: /actuator/health
+    hostname: 38.242.206.98
+  client:
+    region: ID-Bandung - Batununggal
+    service-url:
+      defaultZone: http://eureka:password@38.242.206.98:8761/eureka
+    enabled: false
+
+## Management Actuator Endpoint
+management:
+  endpoint:
+    prometheus:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  metrics:
+    tags:
+      application: ${spring.application.name}
+  prometheus:
+    metrics:
+      export:
+        enabled: true
+
+## OAUTH
+smartpos:
+  auth-server: http://localhost:8686
+  auth-username: admin
+  auth-password: pesonagroup231
+
+jwt:
+  auth:
+    converter:
+      principal-attribute: principal_username
+      resource-id: account-service-client

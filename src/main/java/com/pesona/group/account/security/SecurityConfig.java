@@ -4,6 +4,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
@@ -18,29 +20,30 @@ import java.util.List;
 @RequiredArgsConstructor
 @Configuration
 @EnableWebSecurity
-//@EnableMethodSecurity
+@EnableMethodSecurity
 public class SecurityConfig {
-    public static final String ADMIN = "app.admin";
-    public static final String USER = "app.user";
-
     private final JwtConverter jwtConverter;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.csrf(AbstractHttpConfigurer::disable).
-                cors(cors -> cors.configurationSource(corsConfigurationSource()))
-                .authorizeHttpRequests((AuthorizeHttpRequestsConfigurer<HttpSecurity>.AuthorizationManagerRequestMatcherRegistry authorizationManagerRequestMatcherRegistry) ->
-                        authorizationManagerRequestMatcherRegistry
-                                    .requestMatchers("/actuator/**","/api/v1/account/**").permitAll()
-                                .requestMatchers(HttpMethod.GET, "/api/admin/**").hasRole(ADMIN)
-                                .requestMatchers(HttpMethod.GET, "/api/user/**").hasRole(USER)
-                                .requestMatchers(HttpMethod.GET, "/api/admin-and-user/**").hasAnyRole(ADMIN, USER)
-                                .anyRequest().authenticated())
-                .sessionManagement(sessionManagement -> sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .oauth2ResourceServer(oauth2 -> oauth2
-                        .jwt(jwt -> jwt.jwtAuthenticationConverter(jwtConverter))
-                );
+        http.authorizeHttpRequests( authorizeHttpRequests ->
+                authorizeHttpRequests
+                        .requestMatchers("/api/v1/account/**")
+                        .authenticated()
+                        // others are public
+                        .requestMatchers("/login/**", "/oauth2/**")
+                        .permitAll()
 
+        );
+        http.oauth2ResourceServer(
+            oauth2 ->
+            oauth2.jwt(
+                    jwt ->
+                    jwt.jwtAuthenticationConverter(
+                            jwtConverter
+                    )
+            )
+        );
         return http.build();
     }
 
